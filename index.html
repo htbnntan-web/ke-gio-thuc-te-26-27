@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      (function () {
+        try {
+          var desc =
+            Object.getOwnPropertyDescriptor(window, 'fetch') ||
+            Object.getOwnPropertyDescriptor(Window.prototype, 'fetch');
+          if (desc && desc.get && !desc.set && desc.configurable !== false) {
+            var currentFetch = desc.get.call(window);
+            Object.defineProperty(window, 'fetch', {
+              configurable: true,
+              enumerable: true,
+              get: function () {
+                return currentFetch;
+              },
+              set: function (fn) {
+                if (typeof fn === 'function') {
+                  currentFetch = fn;
+                }
+              },
+            });
+          }
+        } catch (e) {}
+        window.addEventListener(
+          'error',
+          function (e) {
+            if (
+              (e.filename && e.filename.indexOf('chrome-extension://') === 0) ||
+              (e.message && e.message.indexOf('Cannot set property fetch') !== -1)
+            ) {
+              e.stopImmediatePropagation();
+              e.preventDefault();
+            }
+          },
+          true
+        );
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Kê giờ Hàm Thuận Bắc</title>
+    <meta name="description" content="Hệ thống kê giờ thực tế lên lớp (Mẫu số 03, TN_01, TN_02, TN_03) năm học 2026 – 2027 của Trường THPT Hàm Thuận Bắc." />
+    <meta property="og:title" content="Kê giờ Hàm Thuận Bắc" />
+    <meta property="og:description" content="Hệ thống kê giờ thực tế lên lớp (Mẫu số 03, TN_01, TN_02, TN_03) năm học 2026 – 2027 của Trường THPT Hàm Thuận Bắc." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Lora:wght@600;700&display=swap" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.4.0/exceljs.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

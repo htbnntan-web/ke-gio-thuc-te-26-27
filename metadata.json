@@ -1,0 +1,6 @@
+{
+  "name": "Kê giờ Hàm Thuận Bắc",
+  "description": "Hệ thống kê giờ thực tế lên lớp (Mẫu số 03, TN_01, TN_02, TN_03) năm học 2026 – 2027 của Trường THPT Hàm Thuận Bắc.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
